@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.PasswordField?>
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="8" fx:controller="rcon.client.RCONController">
+
+    <padding>
+        <Insets top="8" right="12" bottom="8" left="12"/>
+    </padding>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Host:" style="-fx-text-fill: #b0b0b0;"/>
+        <TextField fx:id="hostField" promptText="localhost"
+                   style="-fx-background-color: #2d2d2d; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #666666;"
+                   prefWidth="120"
+                   onAction="#onConnect"
+        />
+
+        <Label text="Port:" style="-fx-text-fill: #b0b0b0;"/>
+        <TextField fx:id="portField" promptText="25575"
+                   style="-fx-background-color: #2d2d2d; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #666666;"
+                   prefWidth="80"
+                   onAction="#onConnect"
+        />
+
+        <Label text="Password:" style="-fx-text-fill: #b0b0b0;"/>
+        <PasswordField fx:id="passwordField" promptText="RCON password"
+                   style="-fx-background-color: #2d2d2d; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #666666;"
+                   prefWidth="100"
+                   onAction="#onConnect"
+        />
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <Button text="Connect" fx:id="connectButton"
+                style="-fx-background-color: #404040; -fx-text-fill: #ffffff;"
+                onAction="#onConnect"/>
+        <Button text="Disconnect" fx:id="disconnectButton"
+                style="-fx-background-color: #404040; -fx-text-fill: #ffffff;"
+                disable="true"
+                onMouseClicked="#onDisconnect"/>
+    </HBox>
+
+    <!-- Divider (optional) -->
+    <Region prefHeight="8"/>
+
+    <!-- Command Output Area -->
+    <TextArea fx:id="commandOutputArea" wrapText="true"
+              style="-fx-control-inner-background: #1e1e1e; -fx-text-fill: #cccccc; -fx-highlight-fill: #264f78; -fx-highlight-text-fill: #ffffff;"
+              editable="false"
+              VBox.vgrow="ALWAYS">
+        <VBox.margin>
+            <Insets bottom="8"/>
+        </VBox.margin>
+    </TextArea>
+
+    <!-- Command Input Row -->
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text=">" style="-fx-text-fill: #4a9cff;"/>
+        <TextField fx:id="commandLineField" promptText="Enter command..."
+                   style="-fx-background-color: #2d2d2d; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #666666;"
+                   HBox.hgrow="ALWAYS"
+                   onAction="#sendCommand"
+                   disable="true"
+                   onKeyPressed="#handleInputCommand"
+        />
+        <Button text="Send" fx:id="sendButton"
+                style="-fx-background-color: #404040; -fx-text-fill: #ffffff;"
+                disable="true"
+                onAction="#sendCommand"/>
+
+        <Button text="Clear" fx:id="clearButton"
+                style="-fx-background-color: #404040; -fx-text-fill: #ffffff;"
+                onAction="#onClear"/>
+    </HBox>
+
+</VBox>
